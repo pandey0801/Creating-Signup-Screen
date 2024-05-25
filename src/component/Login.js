@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
+import Update from "./Update";
 
 function Login() {
   const email = useRef("");
@@ -84,12 +85,14 @@ function Login() {
 
   console.log(Welcome);
 
+  {Welcome && (<Update/>)}
+
   return (
+<>
+    {!Welcome ? ( 
     
       <div className="flex flex-col justify-center items-center bg-gray-100 min-h-screen">
 
-{!Welcome ? (
-        <>
         <div className="bg-white w-96 p-8 rounded-lg shadow-lg m-9 h-[28rem] ">
           {isLogIn ? (
             <h1 className="text-2xl mb-8 text-bold text-center">Log in</h1>
@@ -172,17 +175,24 @@ function Login() {
             </span>
           </button>
         </div>
-        </>
-      ) : (
-        <div>
-          <h1 className="text-2xl mb-8 font-bold text-center">
-            Welcome to Expense Tracker
-          </h1>
-        </div>
-      )}
+        
+      {/* // ) : (
+        // <div>
+        //   <h1 className="text-2xl mb-8 font-bold text-center">
+        //     Welcome to Expense Tracker
+        //   </h1>
+        // </div>
+        // <Update></Update>
+      // )} */}
       </div>
+
+      ) : (
+        <Update></Update>
+      )}
     
+    </>
   );
+ 
 }
 
 export default Login;
