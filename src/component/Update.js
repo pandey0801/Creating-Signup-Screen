@@ -91,10 +91,6 @@ const fetchData = ()=>{
   fetch('https://react-http-af8d1-default-rtdb.firebaseio.com/profile.json',
     {
       method:"GET",
-      // body: token
-      // body: JSON.stringify({
-      //   idToken: token
-      // }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -115,10 +111,40 @@ const fetchData = ()=>{
       if (error.data) {
         console.error("Error details:", error.data);
       }
-    });
-
-  
+    });  
  }
+
+ const sendVerificationEmail = () => {
+  // const user = firebase.auth().currentUser;
+
+  // if (user) {
+    // user.getIdToken(true).then((idToken) => {
+      fetch(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBKgJHQ2FKkDZ_JHWUlBCBL1I1Ry-bSEOw`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          requestType: 'VERIFY_EMAIL',
+          idToken: token
+        }),
+      }).then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to send verification email.');
+        }
+      }).then((data) => {
+        console.log('Verification email sent:', data);
+      }).catch((error) => {
+        console.error('Error sending verification email:', error);
+      });
+    // });
+  // } else {
+    // console.log('No user is signed in.');
+  // }
+};
+
 
   return (
     <div>
@@ -201,6 +227,11 @@ const fetchData = ()=>{
           ))}
         </div>
       </div>
+
+      <div>
+        <button type="button" onClick={sendVerificationEmail}>Send Verification Email</button>
+      </div>
+
     </div>
   );
 }
