@@ -65,7 +65,7 @@ function Login() {
           console.log("idToken:", data.idToken);
           const token = data.idToken;
           setWelcome(true);
-          // localStorage.setItem('token', token);
+          localStorage.setItem('token', token);
 
           // authCtx.login(data.idToken);
           // history.replace('/');
