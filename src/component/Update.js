@@ -3,6 +3,7 @@ import { FaYoutube, FaInstagram, FaSpotify } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { IoPlanetSharp } from "react-icons/io5";
 import { useRef } from "react";
+import LogOut from "./LogOut";
 
 export default function Update() {
   const name = useRef();
@@ -114,11 +115,8 @@ const fetchData = ()=>{
     });  
  }
 
+ //email verification 
  const sendVerificationEmail = () => {
-  // const user = firebase.auth().currentUser;
-
-  // if (user) {
-    // user.getIdToken(true).then((idToken) => {
       fetch(`https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBKgJHQ2FKkDZ_JHWUlBCBL1I1Ry-bSEOw`, {
         method: 'POST',
         headers: {
@@ -139,10 +137,6 @@ const fetchData = ()=>{
       }).catch((error) => {
         console.error('Error sending verification email:', error);
       });
-    // });
-  // } else {
-    // console.log('No user is signed in.');
-  // }
 };
 
 
@@ -158,6 +152,10 @@ const fetchData = ()=>{
             you'r profile is incomplet{" "}
             <span className="text-blue-700">Complet now</span>
           </button>
+        </div>
+
+        <div>
+          <LogOut/>
         </div>
       </div>
 
