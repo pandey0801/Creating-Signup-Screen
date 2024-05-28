@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import Update from "./Update";
+import ForgetPas from "./ForgetPas";
+import { NavLink } from "react-router-dom";
 
 function Login() {
   const email = useRef("");
@@ -9,7 +11,7 @@ function Login() {
 
   const [isLogIn, setIsLogIn] = useState(true);
   const [Welcome,setWelcome] = useState(false);
-
+  const [forpas, setForPass] = useState(false); 
   console.log(Welcome);
 
   const switchMood = () => {
@@ -22,6 +24,7 @@ function Login() {
     const pas1 = password1.current.value;
     const pas2 = password2.current.value;
     const enteredEmail = email.current.value;
+  
 
     if (pas1 === pas2) {
       console.log("login");
@@ -86,6 +89,14 @@ function Login() {
   console.log(Welcome);
 
   {Welcome && (<Update/>)}
+
+  const forgotPssword = () =>
+    {
+      // setforpass((per)=()=>!per);
+      // return <ForgetPas/>
+      // setForPass(true);
+      <NavLink to="/Forget">forgot Pssword</NavLink>
+    }
 
   return (
 <>
@@ -160,6 +171,12 @@ function Login() {
                   Sing Up
                 </button>
               )}
+
+              <div className="flex justify-center">
+                {/* <button onClick={forgotPssword}>Forgot password ?</button> */}
+                <NavLink to="/Forget">forgot Pssword</NavLink>
+              </div>
+
             </div>
           </form>
         </div>
@@ -190,6 +207,9 @@ function Login() {
         <Update></Update>
       )}
     
+
+      {/* {forpas && (<ForgetPas/>)} */}
+
     </>
   );
  

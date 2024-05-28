@@ -4,6 +4,7 @@ import Login from "./component/Login";
 // import { Router, Switch, NavLink, Route } from "react-router-dom";
 import { BrowserRouter as Router, Switch, NavLink, Route } from "react-router-dom";
 import LogOut from "./component/LogOut";
+import ForgetPas from "./component/ForgetPas";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/logout" component={LogOut} />
+          <Route path="/Forget" component={ForgetPas}/>
         </Switch>
       </Router>
       {/* <Login></Login> */}
