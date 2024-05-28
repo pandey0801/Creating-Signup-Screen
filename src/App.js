@@ -5,6 +5,7 @@ import Login from "./component/Login";
 import { BrowserRouter as Router, Switch, NavLink, Route } from "react-router-dom";
 import LogOut from "./component/LogOut";
 import ForgetPas from "./component/ForgetPas";
+import DailyExpenses from "./component/DailyExpenses";
 
 function App() {
   return (
@@ -31,6 +32,12 @@ function App() {
         </div>
 
         <div className="flex-none w-20 h-7">
+          <NavLink to="/daily" className="text-white">
+            Expenses
+          </NavLink>
+        </div>
+
+        <div className="flex-none w-20 h-7">
           <NavLink to="/logout" className="text-white">
             LogOut
           </NavLink>
@@ -42,6 +49,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/logout" component={LogOut} />
           <Route path="/Forget" component={ForgetPas}/>
+          <Route path="/daily" component={DailyExpenses}/>
         </Switch>
       </Router>
       {/* <Login></Login> */}
