@@ -1,18 +1,33 @@
+
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import { expensesActions } from "../store/ExpensesStatus";
+// import { expensesActions } from "../store/exp";
+import expensesActions from "../component/store/exp"
+
+// import { privacyActions } from "../store/privacy";
 
 export default function DailyExpenses() {
   const [money, setMoney] = useState("");
   const [des, setDes] = useState("");
   const [cat, setCat] = useState("Food");
-  const [data, setData] = useState([]);
-  const [editingKey, setEditingKey] = useState(null); // New state to track the key of the expense being edited
+  const [editingKey, setEditingKey] = useState(null);
+
+  const dispatch = useDispatch();
+  // const allexp = useDispatch((state)=>state.expenses);
+  const expenses = useSelector((state) => state.expenses.expenses);
+  const totalAmount = useSelector((state) => state.expenses.totalAmount);
+  const premiumActive = useSelector((state) => state.expenses.premiumActive);
+
+  // console.log(expenses);
+  // console.log(totalAmount);
+  // console.log(premiumActive);
 
   const submitHandle = (e) => {
     e.preventDefault();
     const newData = { money, des, cat };
 
     if (editingKey) {
-      // If editing an existing expense, perform a PUT request
       fetch(`https://expensetracker-7f8dd-default-rtdb.firebaseio.com/expensetracker/${editingKey}.json`, {
         method: "PUT",
         headers: {
@@ -22,16 +37,16 @@ export default function DailyExpenses() {
       })
         .then((res) => res.json())
         .then(() => {
-          getData(); // Refresh the data after updating
-          // Clear the form fields
+          // console.log(newData); //{money: '2000', des: 'samosh', cat: 'Food'} update value
+          // console.log(editingKey); //-NzIz6d_p1zbwqDH96ge
+          dispatch(expensesActions.updateExpense({ ...newData, key: editingKey }));
           setMoney("");
           setDes("");
           setCat("Food");
-          setEditingKey(null); // Clear the editing key
+          setEditingKey(null);
         })
         .catch((error) => console.error("Error updating data:", error));
     } else {
-      // If adding a new expense, perform a POST request
       fetch("https://expensetracker-7f8dd-default-rtdb.firebaseio.com/expensetracker.json", {
         method: "POST",
         headers: {
@@ -39,10 +54,18 @@ export default function DailyExpenses() {
         },
         body: JSON.stringify(newData),
       })
-        .then((res) => res.json())
-        .then(() => {
-          getData(); // Refresh the data after submitting
-          // Clear the form fields
+        .then((res) =>   //Reads and parses the response body as JSON, returning a promise that resolves to the parsed data.
+          res.json()
+          // console.log(res); // Response {type: 'cors', url: 'https://expensetracker-7f8dd-default-rtdb.firebaseio.com/expensetracker.json', redirected: false, status: 200, ok: true, …}
+          // console.log(res.json()); // Promise {<pending>}
+          
+        
+      
+      )
+        //Works with the parsed data to perform further operations. data is vareable 
+        .then((data) => { 
+          // console.log(data); //{name: '-NzMHBTKLM-w8wcFn-E8'}
+          dispatch(expensesActions.addExpense({ ...newData, key: data.name }));
           setMoney("");
           setDes("");
           setCat("Food");
@@ -51,14 +74,14 @@ export default function DailyExpenses() {
     }
   };
 
-  //DELETE method
   const deleteExpense = (key) => {
     fetch(`https://expensetracker-7f8dd-default-rtdb.firebaseio.com/expensetracker/${key}.json`, {
       method: "DELETE",
     })
       .then((res) => {
         if (res.ok) {
-          setData(data.filter((item) => item.key !== key));
+          // console.log(key); //-NzMGueYmKqrRIyDSKGI
+          dispatch(expensesActions.deleteExpense(key));
         } else {
           throw new Error("Failed to delete data.");
         }
@@ -66,8 +89,6 @@ export default function DailyExpenses() {
       .catch((error) => console.error("Error deleting data:", error));
   };
 
-
-  //GET method
   const getData = () => {
     fetch("https://expensetracker-7f8dd-default-rtdb.firebaseio.com/expensetracker.json", {
       method: "GET",
@@ -77,14 +98,18 @@ export default function DailyExpenses() {
     })
       .then((res) => {
         if (res.ok) {
+          // console.log(res.json()); //Promise {<pending>}
           return res.json();
         } else {
           throw new Error("Failed to fetch data.");
         }
       })
       .then((data) => {
+        // console.log(data);  //-NzIz6d_p1zbwqDH96ge: {cat: 'Food', des: 'samosh', money: '1000'} ...
         const dataArray = data ? Object.keys(data).map((key) => ({ key, ...data[key] })) : [];
-        setData(dataArray);
+        // This maps over the keys of the data object, creating a new array where each expense object includes its key.
+       // console.log(dataArray); //[0: {key: '-NzIz6d_p1zbwqDH96ge', cat: 'Food', des: 'samosh', money: '1000'} ...]
+        dispatch(expensesActions.setExpenses(dataArray));
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
@@ -93,7 +118,7 @@ export default function DailyExpenses() {
     setMoney(expense.money);
     setDes(expense.des);
     setCat(expense.cat);
-    setEditingKey(expense.key); // Set the editing key to the key of the expense being edited
+    setEditingKey(expense.key);
   };
 
   useEffect(() => {
@@ -153,8 +178,16 @@ export default function DailyExpenses() {
         </div>
       </form>
 
+      {premiumActive && (
+        <div className="mt-6 w-full max-w-md text-center">
+          <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+            Activate Premium
+          </button>
+        </div>
+      )}
+
       <div className="mt-6 w-full max-w-md">
-        {data.map((expense) => (
+        {expenses.map((expense) => (
           <div key={expense.key} className="bg-white p-4 rounded-lg shadow-md mb-4">
             <p className="text-gray-700"><strong>Money:</strong> {expense.money}</p>
             <p className="text-gray-700"><strong>Description:</strong> {expense.des}</p>
@@ -179,4 +212,3 @@ export default function DailyExpenses() {
     </div>
   );
 }
-
