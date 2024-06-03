@@ -18,6 +18,7 @@ function Login() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.log);
 
+
   // console.log(authState); //{isLoggedIn: false, bearerToken: null, userId: null}
 
   // Function to switch between login and signup modes

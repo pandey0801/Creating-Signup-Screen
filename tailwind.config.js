@@ -6,5 +6,22 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  
+  variants: {
+    extend: {},
+  },
 }
 
+
+
+/*
+module.exports = {
+  darkMode: 'class', // or 'media' if you prefer system setting
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}*/

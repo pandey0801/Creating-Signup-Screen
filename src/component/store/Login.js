@@ -4,6 +4,8 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 // import expensesSlice from "./exp";
 import { expensesSl } from "./exp";
 import { logSl } from "./LogStatus";
+import themeSlice from "./Theme";
+
 
 // const logSlice = createSlice({
 //   name: "log",
@@ -92,6 +94,7 @@ const store = configureStore({
     log: logSl.reducer,
     // expenses: expensesSlice.reducer
     expenses: expensesSl.reducer,
+    themeUse: themeSlice.reducer
   },
 });
 
