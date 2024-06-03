@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, NavLink, Route } from "react-router-do
 import LogOut from "./component/LogOut";
 import ForgetPas from "./component/ForgetPas";
 import DailyExpenses from "./component/DailyExpenses";
+import HomePage from "./component/HomePage";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
       </nav>
    
         <Switch>
+          <Route path="/home" component={HomePage}/>
           <Route path="/login" component={Login} />
           <Route path="/logout" component={LogOut} />
           <Route path="/Forget" component={ForgetPas}/>

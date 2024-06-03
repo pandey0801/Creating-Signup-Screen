@@ -4,6 +4,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 // import expensesSlice from "./exp";
 import { expensesSl } from "./exp";
 import { logSl } from "./LogStatus";
+import themeSlice from "./Theme";
 
 
 // const logSlice = createSlice({
@@ -26,7 +27,6 @@ import { logSl } from "./LogStatus";
 //     },
 //   },
 // });
-
 
 /*
 
@@ -93,15 +93,13 @@ const store = configureStore({
     // log: logSlice.reducer,
     log: logSl.reducer,
     // expenses: expensesSlice.reducer
-    expenses : expensesSl.reducer
-
+    expenses: expensesSl.reducer,
+    themeUse: themeSlice.reducer
   },
 });
 
 // export const logAction = logSlice.actions;
 
 // export const expensesActions = expensesSlice.actions;
-
-
 
 export default store;
