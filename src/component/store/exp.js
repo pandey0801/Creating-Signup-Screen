@@ -57,15 +57,7 @@ const initialState = {
     },
   });
   
-  
-  // const store = configureStore({
-  //   reducer: {
-  //     log: logSlice.reducer,
-  //     expenses: expensesSlice.reducer
-  
-  //   },
-  // });
-
+ 
   // export const expensesActions = expensesSlice.actions;
   // export default expensesSlice;
 

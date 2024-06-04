@@ -1,48 +1,9 @@
-/*
 import React from "react";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
   const theme = useSelector((state) => state.themeUse.isDarkMode);
-
-  return (
-    <div className={`min-h-screen p-6 ${theme ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
-      <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Expense Tracker</h1>
-        <p className="text-xl">Manage your daily expenses effortlessly with Expense Tracker. Track your spending, categorize expenses, and stay on top of your finances with our user-friendly platform.</p>
-      </header>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Features:</h2>
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-bold">1. Premium Mode:</h3>
-            <p>Unlock exclusive features and tools designed to give you deeper insights into your spending habits. Premium mode offers advanced analytics and personalized budgeting tips to help you manage your finances more effectively.</p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold">2. Dark Mode:</h3>
-            <p>Switch to Dark Mode for a comfortable viewing experience during nighttime or low-light environments. This mode reduces eye strain and makes it easier to use the app for extended periods.</p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold">3. Download as CSV:</h3>
-            <p>Easily export your expense data as a CSV file. This feature allows you to keep a backup of your expenses, share with others, or import into other financial software for further analysis.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default HomePage;
-*/
-
-import React from "react";
-import { useSelector } from "react-redux";
-
-const HomePage = () => {
-  const theme = useSelector((state) => state.themeUse.isDarkMode);
+  // const theme = true;
 
   return (
     <div className={`min-h-screen p-6 ${theme ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"} transition-colors duration-300`}>
