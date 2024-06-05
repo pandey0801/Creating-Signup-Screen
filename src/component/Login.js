@@ -13,6 +13,8 @@ function Login() {
   const password2 = useRef("");
 
   const [isLogIn, setIsLogIn] = useState(true);
+  const theme = useSelector((state)=>state.themeUse.isDarkMode)
+
   // const [Welcome, setWelcome] = useState(false);
 
   const dispatch = useDispatch();
@@ -90,7 +92,7 @@ function Login() {
 
   // Function to handle forgot password
   const forgotPassword = () => {
-    return <NavLink to="/Forget">Forgot Password</NavLink>;
+    return <NavLink to="/Forget" className={`${theme?'text-white':'text-gray-900'}`}>Forgot Password</NavLink>;
   };
 
   console.log(authState);
@@ -98,19 +100,19 @@ function Login() {
   return (
     <>
       {!authState.isLoggedIn ? (
-        <div className="flex flex-col justify-center items-center bg-gray-100 min-h-screen">
-          <div className="bg-white w-96 p-8 rounded-lg shadow-lg m-9 h-[28rem] ">
+            <div className={`flex flex-col justify-center items-center min-h-screen ${theme ? 'bg-gray-900':'bg-gray-100'} `}>
+          <div className={`w-96 p-8 rounded-lg shadow-lg m-9 h-[28rem] ${theme ?'bg-gray-800':'bg-white'}`}>
             {isLogIn ? (
-              <h1 className="text-2xl mb-8 font-bold text-center">Log in</h1>
+              <h1 className={`text-2xl mb-8 font-bold text-center ${theme? 'text-white':'text-gray-900'}`} >Log in</h1>
             ) : (
-              <h1 className="text-2xl mb-8 font-bold text-center">Sign Up</h1>
+              <h1 className={`text-2xl mb-8 font-bold text-center ${theme? 'text-white':'text-gray-900'}`}>Sign Up</h1>
             )}
 
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="display-block text-sm font-medium text-gray-700 mb-2"
+                  className={`display-block text-sm font-medium mb-2 ${theme?'text-white':'text-gray-900'}`}
                 >
                   Email
                 </label>
@@ -124,7 +126,7 @@ function Login() {
               <div className="mb-4">
                 <label
                   htmlFor="password"
-                  className="display-block text-sm font-medium text-gray-700 mb-2"
+                  className={`display-block text-sm font-medium mb-2 ${theme?'text-white':'text-gray-900'}`}
                 >
                   Enter Password
                 </label>
@@ -138,7 +140,7 @@ function Login() {
               <div className="mb-4">
                 <label
                   htmlFor="password"
-                  className="display-block text-sm font-medium text-gray-700 mb-2"
+                  className={`display-block text-sm font-medium mb-2 ${theme?'text-white':'text-gray-900'}`}
                 >
                   Confirm Password
                 </label>

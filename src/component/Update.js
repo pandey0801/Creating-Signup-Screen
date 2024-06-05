@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaYoutube, FaInstagram, FaSpotify } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { IoPlanetSharp } from "react-icons/io5";
 import { useRef } from "react";

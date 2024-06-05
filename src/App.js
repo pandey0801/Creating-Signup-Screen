@@ -10,8 +10,17 @@ import LogOut from "./component/LogOut";
 import ForgetPas from "./component/ForgetPas";
 import DailyExpenses from "./component/DailyExpenses";
 import HomePage from "./component/HomePage";
+import { useSelector } from "react-redux";
+
 
 function App() {
+
+  const {isLoggedIn} = useSelector((state) => state.log);
+
+  // console.log(authState);
+  console.log(isLoggedIn)
+
+
   return (
     <>
       <Router>
@@ -27,23 +36,24 @@ function App() {
             </NavLink>
           </div>
 
-          <div className="flex-none w-20 h-7">
+  {isLoggedIn && ( <div className="flex-none w-20 h-7">
             <NavLink to="/daily" className="text-white">
               Expenses
             </NavLink>
-          </div>
+          </div>)}       
 
-          <div className="flex-none w-20 h-7">
+{isLoggedIn && (<div className="flex-none w-20 h-7">
             <NavLink to="/logout" className="text-white">
               LogOut
             </NavLink>
-          </div>
+          </div>)}
+          
         </nav>
 
         <Switch>
-          <Route path="/home" component={HomePage} />
+          <Route path="/home" exact component={HomePage} />
           <Route path="/login" component={Login} />
-          <Route path="/logout" component={LogOut} />
+          <Route path="/logout" component={LogOut}/>
           <Route path="/Forget" component={ForgetPas} />
           <Route path="/daily" component={DailyExpenses} />
         </Switch>
