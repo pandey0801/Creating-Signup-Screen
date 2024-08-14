@@ -11,51 +11,63 @@ import ForgetPas from "./component/ForgetPas";
 import DailyExpenses from "./component/DailyExpenses";
 import HomePage from "./component/HomePage";
 import { useSelector } from "react-redux";
-
+import Update from "./component/Update";
 
 function App() {
-
-  const {isLoggedIn} = useSelector((state) => state.log);
-
-  // console.log(authState);
-  console.log(isLoggedIn)
-
+  const { isLoggedIn } = useSelector((state) => state.log);
+  // console.log(isLoggedIn)
 
   return (
     <>
       <Router>
-        <nav className="p-3 flex bg-black justify-center items-center">
+        <nav className="p-3 flex bg-slate-950 justify-center items-center">
           <div className="flex-none w-20 h-7">
             <NavLink to="/home" className="text-white">
               Home
             </NavLink>
           </div>
-          <div className="flex-none w-20 h-7">
+
+         {!isLoggedIn && <div className="flex-none w-20 h-7">
             <NavLink to="/login" className="text-white">
               Login
             </NavLink>
-          </div>
-
-  {isLoggedIn && ( <div className="flex-none w-20 h-7">
-            <NavLink to="/daily" className="text-white">
-              Expenses
-            </NavLink>
-          </div>)}       
-
-{isLoggedIn && (<div className="flex-none w-20 h-7">
-            <NavLink to="/logout" className="text-white">
-              LogOut
-            </NavLink>
-          </div>)}
+          </div>}
           
+
+          {isLoggedIn && (
+            <div className="flex-none w-20 h-7">
+              <NavLink to="/update" className="text-white">
+                Profile
+              </NavLink>
+            </div>
+          )}
+
+          {isLoggedIn && (
+            <div className="flex-none w-20 h-7">
+              <NavLink to="/daily" className="text-white">
+                Expenses
+              </NavLink>
+            </div>
+          )}
+
+          {isLoggedIn && (
+            <div className="flex-none w-20 h-7">
+              <NavLink to="/logout" className="text-white">
+                LogOut
+              </NavLink>
+            </div>
+          )}
+
+
         </nav>
 
         <Switch>
           <Route path="/home" exact component={HomePage} />
           <Route path="/login" component={Login} />
-          <Route path="/logout" component={LogOut}/>
+          <Route path="/logout" component={LogOut} />
           <Route path="/Forget" component={ForgetPas} />
           <Route path="/daily" component={DailyExpenses} />
+          <Route path="/update" component={Update} />
         </Switch>
       </Router>
     </>

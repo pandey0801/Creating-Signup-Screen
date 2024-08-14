@@ -42,10 +42,12 @@ function Login() {
         // Log in
         url =
           "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKgJHQ2FKkDZ_JHWUlBCBL1I1Ry-bSEOw";
+          // "AIzaSyDPFq-SUKb5VgtCQVzzLrwXCUaeSj8XGKk"
+          // "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?AIzaSyDPFq-SUKb5VgtCQVzzLrwXCUaeSj8XGKk";
       } else {
         // Sign up
         url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKgJHQ2FKkDZ_JHWUlBCBL1I1Ry-bSEOw";
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDPFq-SUKb5VgtCQVzzLrwXCUaeSj8XGKk";
       }
 
       fetch(url, {
@@ -95,11 +97,12 @@ function Login() {
     return <NavLink to="/Forget" className={`${theme?'text-white':'text-gray-900'}`}>Forgot Password</NavLink>;
   };
 
-  console.log(authState);
+  // console.log(authState);
 
   return (
     <>
       {!authState.isLoggedIn ? (
+    
             <div className={`flex flex-col justify-center items-center min-h-screen ${theme ? 'bg-gray-900':'bg-gray-100'} `}>
           <div className={`w-96 p-8 rounded-lg shadow-lg m-9 h-[28rem] ${theme ?'bg-gray-800':'bg-white'}`}>
             {isLogIn ? (
@@ -174,9 +177,9 @@ function Login() {
             </span>
           </button>
         </div>
-      ) : (
-        <Update />
-      )}
+       ) : (
+         <Update />
+       )}
     </>
   );
 }
